@@ -1,9 +1,9 @@
 from random import randint
+from unittest.mock import AsyncMock, patch
 from uuid import uuid4
 
 import grpc
 import pytest
-from mock import AsyncMock, patch
 
 from pyzeebe.errors import (
     InvalidJSONError,
@@ -20,7 +20,7 @@ from tests.unit.utils.random_utils import RANDOM_RANGE
 
 @pytest.fixture(autouse=True)
 def mocked_aiofiles_open():
-    read_mock = AsyncMock(return_value=bytes())
+    read_mock = AsyncMock(return_value=b"")
 
     file_mock = AsyncMock()
     file_mock.__aenter__.return_value.read = read_mock
